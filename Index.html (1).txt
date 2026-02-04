@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine for Anu ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(#ffd6e8, #ffeaf3);
+  overflow: hidden;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+}
+
+/* ANU NAME ANIMATION */
+#anu {
+  font-size: 50px;
+  color: crimson;
+  animation: glow 1.5s infinite alternate;
+  margin-top: 40px;
+}
+@keyframes glow {
+  from { text-shadow: 0 0 10px pink; }
+  to { text-shadow: 0 0 25px red; }
+}
+
+/* TEXT */
+p {
+  font-size: 20px;
+  color: #444;
+}
+
+/* BUTTONS */
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: gray;
+  color: white;
+  position: absolute;
+}
+
+/* GIFT BOX */
+#gift {
+  font-size: 60px;
+  cursor: pointer;
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* FLOATING EFFECTS */
+.floating {
+  position: absolute;
+  animation: float 6s linear infinite;
+  font-size: 24px;
+}
+@keyframes float {
+  from { bottom: -50px; }
+  to { bottom: 110%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="Music.mp3" type="audio/mpeg">
+</audio>
+
+<h1 id="anu">Anu ❤️</h1>
+
+<p>Will you be my Valentine Anu? 💖</p>
+<p>You are the reason my heart smiles every day 🌸</p>
+
+<br>
+<button id="yes" onclick="yesClick()">Yes 💘</button>
+<button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 😜</button>
+
+<br><br>
+<div id="gift" onclick="openGift()">🎁</div>
+<p>Tap the gift for surprise</p>
+
+<script>
+// MUSIC PLAY ON FIRST TAP
+document.addEventListener("click", function () {
+  document.getElementById("music").play().catch(()=>{});
+}, { once: true });
+
+// NO BUTTON MOVE
+function moveNo() {
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 100);
+  let no = document.getElementById("no");
+  no.style.left = x + "px";
+  no.style.top = y + "px";
+}
+
+// YES CLICK
+function yesClick() {
+  alert("Yaaay 💖 I knew it Anu!");
+  fireworks();
+}
+
+// GIFT CLICK
+function openGift() {
+  alert("Surprise 🎉 You are my favorite gift ❤️");
+  fireworks();
+}
+
+// FLOATING EFFECTS
+const icons = ["❤️","🎈","⭐","🌸","💖","🎆"];
+setInterval(() => {
+  let span = document.createElement("span");
+  span.className = "floating";
+  span.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+  span.style.left = Math.random()*100 + "vw";
+  span.style.animationDuration = (3 + Math.random()*3) + "s";
+  document.body.appendChild(span);
+  setTimeout(()=>span.remove(),6000);
+}, 400);
+
+// FIREWORKS
+function fireworks(){
+  for(let i=0;i<20;i++){
+    let f=document.createElement("div");
+    f.innerHTML="🎆";
+    f.style.position="absolute";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    f.style.fontSize="30px";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+}
+</script>
+
+</body>
+</html>
